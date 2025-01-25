@@ -1,3 +1,51 @@
 /* 
     General Styles
 */
+.footer-wood {
+    background-color: rgb(220, 248, 198);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: rgb(7, 94, 84);
+
+}
+
+body {
+    background-image: url('https://i.pinimg.com/736x/ab/64/ff/ab64ff8ccaae3304a701f2da5ff55c6e.jpg')
+}
+
+.contact{
+    font-family: 'Lato', sans-serif;
+}
+
+.font-everywhere {
+    font-family: 'Open Sans', serif;
+    color: black;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+.icono:hover {
+cursor: pointer;
+font-size: 20px;
+}
+
+.borrar:hover {
+font-size: 30px;
+color: rgb(245, 131, 133, 1)
+}
+
+.editar:hover  {
+    font-size: 30px;
+}
+
+.editar {
+    text-decoration: none;
+    color: #ece5dd;
+}
+.borrar {
+    color: #ece5dd;
+}

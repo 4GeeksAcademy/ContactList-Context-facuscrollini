@@ -1,18 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacts: [],
+			contactoParaActualizar : []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,6 +27,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+
+			getContactList: async() => {
+				try{
+					const response = await fetch('https://playground.4geeks.com/contact/agendas/facundo/contacts')
+					if(!response.ok){
+						getActions().createUser()
+					}
+					const data = await response.json()
+					const contactos = data.contacts
+					setStore({contacts : contactos })
+				}
+				catch(error){
+						console.log(error)
+				}
+			},
+
+			createUser: async() => {
+				try {
+					const response = await fetch('https://playground.4geeks.com/contact/agendas/facundo', {method: 'POST'})
+				}
+				catch(error){
+					console.log(error)
+				}
+			},
+			agregarContactoParaEditar : (contacto) => {
+					setStore({contactoParaActualizar : contacto})
 			}
 		}
 	};
