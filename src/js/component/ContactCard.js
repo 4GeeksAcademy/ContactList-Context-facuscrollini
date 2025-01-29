@@ -4,15 +4,22 @@ import { Link } from "react-router-dom";
 import "../../styles/index.css";
 
 
+
 const ContactCard = ({ contacts }) => {
 
 	const { actions } = useContext(Context)
 
-	const deleteContact = async (index) => {
+	
+
+
+	const deleteContact = async (id) => {
 		try {
-			const response = await fetch('https://playground.4geeks.com/contact/agendas/facundo/contacts/' + index, { method: "DELETE" })
+			
+			const response = await fetch('https://playground.4geeks.com/contact/agendas/facundo/contacts/' + id, { method: "DELETE" })
 			actions.getContactList()
+
 		}
+
 		catch (error) {
 			alert('Error al borrar el contacto ' + error)
 		}
@@ -27,7 +34,9 @@ const ContactCard = ({ contacts }) => {
 							<img className="object-fit-cover rounded-circle" src="https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" />
 						</div>
 						<div className="col">
+							<div className="border-bottom border-white">
 							<h5>{contacts.name}</h5>
+							</div>
 							<ul className="list-easy">
 								<li><i className="fa-solid fa-location-dot my-2"></i>  {contacts.address}</li>
 								<li><i class="fa-solid fa-phone my-2"></i>  {contacts.phone}</li>
@@ -45,10 +54,10 @@ const ContactCard = ({ contacts }) => {
 						</Link>
 						</div>
 						<div className="mx-auto my-1">
-						<i className="fa-solid fa-trash borrar" data-bs-toggle="modal" data-bs-target="#modal" ></i>
+						<i className="fa-solid fa-trash borrar" data-bs-toggle="modal" data-bs-target={`#modal-${contacts.id}`} ></i>
 						</div>
 						</div>
-						<div className="modal fade font-everywhere" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div className="modal fade font-everywhere" id={`modal-${contacts.id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -59,14 +68,13 @@ const ContactCard = ({ contacts }) => {
 										Eliminar este contacto lo hace de forma permanente.
 									</div>
 									<div class="modal-footer">
-										<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Descartar</button>
+										<button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=> console.log(contacts)}>Descartar</button>
 										<button type="submit" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => { deleteContact(contacts.id) }}>Eliminar</button>
 									</div>
 								</div>
 							</div>
 						</div>
 						</div>
-
 				</div>
 
 			</div>

@@ -6,24 +6,29 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
 
-	const { store, actions} = useContext(Context)
+	const { store, actions } = useContext(Context)
+
+	useEffect(() => {
+		actions.getContactList()
+	}, [])
 
 
-	
-	useEffect(()=>{actions.getContactList()},[])
-	return (<>
+
+	console.log(store.contacts)
+
+return (<>
 	<div className="ml-auto d-flex justify-content-end">
-				<Link to="/addContact">
-					<button className="btn btn-light me-5 rounded-pill mt-2" > + Agregar contacto</button>
-				</Link>
-			</div>
-		{store.contacts.map((contactos, index) => {
-			return (
-				<>
-				<ContactCard  key={index} contacts={contactos}/>
-				</>
-			)
-		})}
-	</>)
+		<Link to="/addContact">
+			<button className="btn btn-light me-5 rounded-pill my-2" > + Agregar contacto</button>
+		</Link>
+	</div>
+	{store.contacts.map((contactos, index) => {
+		return (
+			<>
+				<ContactCard key={index} contacts={contactos} />
+			</>
+		)
+	})}
+</>)
 
 }
